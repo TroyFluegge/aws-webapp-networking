@@ -70,3 +70,8 @@ resource "aws_route_table" "app_route_table" {
     gateway_id = aws_internet_gateway.app_gateway.id
   }
 }
+
+resource "aws_route_table_association" "hashicat" {
+  subnet_id      = aws_subnet.hashicat.id
+  route_table_id = aws_route_table.hashicat.id
+}
