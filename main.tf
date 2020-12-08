@@ -71,14 +71,14 @@ resource "aws_route_table" "app_route_table" {
   }
 }
 
-resource "aws_subnet" "hashicat" {
-  vpc_id     = aws_vpc.hashicat.id
+resource "aws_subnet" "subnet" {
+  vpc_id     = aws_vpc.app_vpc.id
   cidr_block = var.subnet_prefix
 
   tags = local.common_tags
 }
 
-resource "aws_route_table_association" "hashicat" {
-  subnet_id      = aws_subnet.hashicat.id
-  route_table_id = aws_route_table.hashicat.id
+resource "aws_route_table_association" "route_table" {
+  subnet_id      = aws_subnet.subnet.id
+  route_table_id = aws_route_table.app_route_table.id
 }
