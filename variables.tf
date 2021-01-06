@@ -24,6 +24,5 @@ variable "tags" {
 
 variable "environment" {
   description = "The environment that this workload is running in"
-  default = "dev"
+  default = "development"
 }
-
