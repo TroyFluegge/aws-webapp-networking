@@ -1,22 +1,15 @@
-locals {
-   common_tags = {
-    Name = "${var.prefix}-networking"
-    Env   = var.environment
-    }
-}
-
 resource "aws_vpc" "app_vpc" {
   cidr_block           = var.address_space
   enable_dns_hostnames = true
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_subnet" "app_subnet" {
   vpc_id     = aws_vpc.app_vpc.id
   cidr_block = var.subnet_prefix
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_security_group" "webapp_security_group" {
@@ -53,13 +46,13 @@ resource "aws_security_group" "webapp_security_group" {
     prefix_list_ids = []
   }
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_internet_gateway" "app_gateway" {
   vpc_id = aws_vpc.app_vpc.id
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_route_table" "app_route_table" {
